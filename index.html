@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-综合练习-动画-lu1</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+<!--放置舞台-->
+<div id="container"></div>
+
+<script src="js/konva.js"></script>
+<script src="js/TextCircle.js"></script>
+<script>
+    //1.创建舞台
+    var stage = new Konva.Stage({
+        width:window.innerWidth,
+        height:window.innerHeight,
+        container: 'container'
+    });
+
+    //2.创建背景层
+    var bgLayer = new Konva.Layer({});
+    stage.add(bgLayer);
+
+    //圆心
+    var centerX = stage.width() * 0.5;
+    var centerY = stage.height() * 0.5;
+
+    //内外圆半径
+    var bg_inner_circle_r = 150;
+    var bg_outer_circle_r = 300;
+
+    //3.绘制背景里面的圆
+    //3.1 内圆
+    var bg_inner_circle = new Konva.Circle({
+        x:centerX,
+        y:centerY,
+        radius:bg_inner_circle_r,
+        stroke:'#ccc',
+        strokeWidth:6,
+        dash:[7, 3]
+    });
+    bgLayer.add(bg_inner_circle);
+
+    //3.2 外圆
+    var bg_outer_circle = new Konva.Circle({
+        x:centerX,
+        y:centerY,
+        radius:bg_outer_circle_r,
+        stroke:'#ccc',
+        strokeWidth:6,
+        dash:[7, 3]
+    });
+    bgLayer.add(bg_outer_circle);
+
+    //3.3 绘制中心圆
+    var textCircle = new TextCircle({
+        x:centerX,
+        y:centerY,
+        innerRadius:70,
+        outerRadius:80,
+        innerFill:'blue',
+        outerFill:'gray',
+        opacity:0.3,
+        text:"小码哥教育"
+
+    });
+    textCircle.render(bgLayer);
+
+    //3.4 渲染背景层
+    bgLayer.draw();
+
+    //4.创建动画层
+    var animation_layer = new Konva.Layer({});
+    stage.add(animation_layer);
+
+    //4.1 创建内组
+    var inner_group = new Konva.Group({
+        x:centerX,
+        y:centerY
+    });
+    animation_layer.add(inner_group);
+
+    //html5
+    var html5_circle = new TextCircle({
+        x:bg_inner_circle_r * Math.cos(60 * Math.PI /180),
+        y:bg_inner_circle_r * Math.sin(60 * Math.PI/180),
+        innerRadius: 35,
+        outerRadius: 40,
+        innerFill:'pink',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'HTML5'
+    });
+    html5_circle.render(inner_group);
+
+    //iOS
+    var iOS_circle = new TextCircle({
+        x:bg_inner_circle_r * Math.cos(-60 * Math.PI /180),
+        y:bg_inner_circle_r * Math.sin(-60 * Math.PI/180),
+        innerRadius: 35,
+        outerRadius: 40,
+        innerFill:'black',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'iOS'
+    });
+    iOS_circle.render(inner_group);
+
+    //UI
+    var UI_circle = new TextCircle({
+        x:bg_inner_circle_r * Math.cos(160 * Math.PI /180),
+        y:bg_inner_circle_r * Math.sin(160 * Math.PI/180),
+        innerRadius: 35,
+        outerRadius: 40,
+        innerFill:'red',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'UI'
+    });
+    UI_circle.render(inner_group);
+
+    //4.2 创建外组
+    var outer_group = new Konva.Group({
+        x:centerX,
+        y:centerY
+    });
+    animation_layer.add(outer_group);
+    //Java
+    var java_circle = new TextCircle({
+        x:bg_outer_circle_r * Math.cos(160 * Math.PI /180),
+        y:bg_outer_circle_r * Math.sin(160 * Math.PI/180),
+        innerRadius: 70,
+        outerRadius: 80,
+        innerFill:'purple',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'Java'
+    });
+    java_circle.render(outer_group);
+
+    //C++
+    var cpp_circle = new TextCircle({
+        x:bg_outer_circle_r * Math.cos(60 * Math.PI /180),
+        y:bg_outer_circle_r * Math.sin(60 * Math.PI/180),
+        innerRadius: 70,
+        outerRadius: 80,
+        innerFill:'yellow',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'C++'
+    });
+    cpp_circle.render(outer_group);
+
+    //android
+    var android_circle = new TextCircle({
+        x:bg_outer_circle_r * Math.cos(-60 * Math.PI /180),
+        y:bg_outer_circle_r * Math.sin(-60 * Math.PI/180),
+        innerRadius: 70,
+        outerRadius: 80,
+        innerFill:'green',
+        outerFill:'gray',
+        opacity: 0.3,
+        text: 'android'
+    });
+    android_circle.render(outer_group);
+
+    //4.3 渲染动画层 注意:一定要先render 再绘制draw
+    animation_layer.draw();
+
+    //5.实现旋转动画
+    // 5.1 每一秒旋转60度
+    var rotateAnglePerSecond = 60;
+    var animation = new Konva.Animation(function (frame) {
+        //5.2 求一帧的旋转角度
+        //上一帧到当前帧的时间差 ms -->s
+        var timeDiff = frame.timeDiff / 1000;
+        //一帧转多少度
+        var rotateAngle = timeDiff * rotateAnglePerSecond;
+
+        //5.3 内组执行动画
+        inner_group.rotate(rotateAngle);
+        //让组中所有元素自转
+        inner_group.getChildren().each(function (item,index) {
+           item.rotate(-rotateAngle);
+        });
+
+        //5.4 外组执行动画
+        outer_group.rotate(-rotateAngle);
+        outer_group.getChildren().each(function (item, index) {
+            item.rotate(rotateAngle);
+        })
+
+    }, animation_layer);
+    //5.5 开启动画
+    animation.start();
+
+
+    //6.特殊情况处理
+    animation_layer.on('mousemove',function () {
+//        rotateAnglePerSecond = 10;
+        animation.stop();
+    });
+    animation_layer.on('mouseout',function () {
+//        rotateAnglePerSecond = 60;
+        animation.start();
+    })
+
+
+</script>
+
+</body>
+</html>
