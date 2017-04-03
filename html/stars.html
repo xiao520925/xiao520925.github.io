@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星星海</title>
+    <style>
+        *{margin: 0; padding: 0; border: 0;}
+        body{
+            background-color: #000;
+        }
+        span{
+            width:30px;
+            height: 30px;
+            background: url("../image/star.png") no-repeat;
+            position: absolute;
+            background-size: 100% 100%;
+            animation: flash 0.5s  alternate infinite;
+        }
+
+        @keyframes flash {
+            0%{opacity: 0;}
+            100%{opacity: 1;}
+        }
+
+        span:hover{
+            transform: scale(3) rotate(-180deg) !important;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    window.onload = function () {
+        // 0. 求出屏幕的尺寸
+        var screenW = document.documentElement.clientWidth;
+        var screenH = document.documentElement.clientHeight;
+        // 1. 动态创建星星
+        for(var i=0; i<107; i++){
+             var span = document.createElement('span');
+             document.body.appendChild(span);
+            // 1.1 随机坐标
+            var left = Math.random() * screenW;
+            var top = Math.random() * screenH;
+
+            span.style.left = left +'px';
+            span.style.top = top +'px';
+
+            // 1.2 随机的缩放
+            var scal = Math.random() * 2;
+            span.style.transform = 'scale('+scal+')';
+
+            //1.3随机闪烁频率
+            var rate = Math.random() * 1.5;
+            span.style.animationDelay = rate +'s';
+        }
+    }
+</script>
+</body>
+</html>

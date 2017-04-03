@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas绘制雨滴效果</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        canvas{
+            background: #000;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="900" height="600">您的浏览器不支持canvas标签,请更换浏览器</canvas>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');//设置canvas绘图环境
+    //设置宽高
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    //监听浏览器窗口的变化,动态获取浏览器窗口的宽高
+    window.onresize = function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    };
+    //绘制小方块并让它往下落
+   /* ctx.fillStyle = 'red';
+    ctx.fillRect(100,10,10,20);
+    var y = 10;
+    setInterval(function () {
+        y++
+        ctx.clearRect(0,0,w,h);
+        ctx.fillStyle = "rgba(0,0,0,0.1)";
+        ctx.fillRect(0,0,w,h);//给画布绘制透明矩形层
+        ctx.fillStyle = 'red';
+        ctx.fillRect(100,y,10,20);
+    },1000/60);
+*/
+    function  Drop() {
+
+    };
+    Drop.prototype = {
+        init:function () {
+            this.x = random(0,canvas.width);
+            this.y = 0; //初始y坐标
+            this.vy = random(4,5); // y方向下落的速度值
+            //雨滴下落的高度
+            this.l = random(0.8*canvas.height,0.9*canvas.height);
+            this.r = 1; // 初始化波纹半径
+            this.vr = 1; //波纹半径增大速度
+            this.a = 1; //初始波纹透明度
+            this.va = 0.96; //透明度的变化系数
+        },
+        //绘制方法
+        draw:function () {
+            if(this.y > this.l){//雨滴到达指定位置
+                //绘制圆形实现波纹效果
+                ctx.beginPath(); //
+                ctx.arc(this.x,this.y,this.r,0,2*Math.PI,false);
+                //ctx.strokeStyle = '#66ffff'
+                ctx.strokeStyle = "rgba(192,192,192,"+this.a+")";
+                ctx.stroke();
+            }else {//绘制雨滴
+               // ctx.fillStyle = "rgba(0,255,255,"+this.a+")";
+                ctx.fillStyle = "rgba(211,211,211,"+this.a+")";
+                //ctx.fillStyle = color(this.a);
+                ctx.fillRect(this.x,this.y,2,10);
+            }
+            //绘制完更新坐标
+            this.update();
+        },
+        //更新坐标重绘
+        update:function () {
+            if(this.y < this.l){
+                this.y += this.vy;
+            }else {//雨滴落地指定位置
+                //重新初始雨滴对象
+                //波纹更新半径
+                if(this.a > 0.03){ //透明度大于0.03,就让半径逐渐增大
+                    this.r += this.vr; //更新半径
+                    if(this.r > 40){ //当半径大于50,就让透明度逐渐减小,让波纹逐渐模糊
+                        this.a *= this.va;
+                    }
+                }else {
+                    this.init();
+                }
+            }
+        }
+    };
+    //实例化雨滴对象
+   /* var drop = new Drop();
+    drop.init();
+    drop.draw();*/
+
+    var count = 30; //雨滴个数
+    //用一个数组来存储实例化雨滴
+    var drops = [];
+    //延迟添加每个雨滴实例化对象
+    function setDrop() {
+        for (var i = 0; i < count; i++) {
+            //延迟生成
+            (function (i) { //闭包,把i当做变量传进去
+                setTimeout(function () {
+                    var drop = new Drop();
+                    drop.init();
+                    drops.push(drop)
+                },i*200);
+            })(i)
+        }
+        console.log(drops); //查看数组里面雨滴
+    };
+    setDrop();
+    //绘制出30个雨滴对象 往下掉
+    function move() {
+        ctx.fillStyle = "rgba(0,0,0,0.1)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);//给画布绘制透明矩形层
+
+        for (var i = 0; i < drops.length; i++) { //数组里面添加几个就创建几个
+
+            drops[i].draw();
+        }
+        //原生JS经动画实现动画
+        //requestAnimationFrame(move);
+        setTimeout(function () {
+            move();
+        },1000/60)
+    };
+    move();
+
+    //封装一个生成随机颜色 rgba
+    function color(a) {
+        var r = Math.floor( Math.random()*255 );
+        var g = Math.floor( Math.random()*255 );
+        var b = Math.floor( Math.random()*255 );
+        return "rgba("+r+","+g+","+b+","+a+")"
+    };
+
+    //一个生成随机数的方法
+    function random(min,max) {
+        return Math.random() * (max-min) + min
+    };
+
+</script>
+</body>
+</html>

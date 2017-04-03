@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=640">-->
+    <link rel="stylesheet" href="css/swiper-3.4.1.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/zepto.min.js"></script>
+    <script src="js/swiper-3.4.1.jquery.min.js"></script>
+    <script src="js/swiper.animate1.0.2.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            list-style: none;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        html, body, .swiper-container, .swiper-wrapper, .swiper-slide {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide img {
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .s1 {
+            background: #FFC800;
+        }
+        .s1 img:nth-child(1) {
+            margin-left: -130px;
+            margin-top: -10px;
+        }
+        .s1 img:nth-child(2) {
+            margin-left: -135px;
+            margin-top: -210px;
+        }
+        .s1 img:nth-child(3) {
+            margin-left: -70px;
+            margin-top: -150px;
+        }
+        .s1 img:nth-child(4) {
+            margin-left: -65px;
+            margin-top: -75px;
+        }
+        .s1 img:nth-child(5) {
+            margin-left: -70px;
+            margin-top: -15px;
+        }
+
+
+
+
+        .s2 img:nth-child(1){
+            margin-left: 100px;
+            margin-top: -335px;
+        }
+        .s2 img:nth-child(2){
+            margin-left: -200px;
+            margin-top: -335px;
+        }
+        .s2 img:nth-child(3){
+            margin-left: -190px;
+            margin-top: 60px;
+        }
+        .s2 img:nth-child(4){
+            margin-left: -150px;
+            margin-top: 60px;
+        }
+        .s2 img:nth-child(5){
+            margin-left: -110px;
+            margin-top: 60px;
+        }
+        .s2 img:nth-child(6){
+            margin-left: 10px;
+            margin-top: -310px;
+        }
+        .s2 img:nth-child(7){
+            margin-left: 65px;
+            margin-top: -180px;
+        }
+        .s2 img:nth-child(8){
+            margin-left: 40px;
+            margin-top: 149px;
+        }
+        .s2 img:nth-child(9){
+            margin-left: -180px;
+            margin-top: -175px;
+        }
+
+
+
+        .s3 img:nth-child(1){
+            margin-left: -45px;
+            margin-top: -200px;
+            z-index: 2;
+        }
+        .s3 img:nth-child(2){
+             margin-left: -200px;
+             margin-top: -335px;
+         }
+        .s3 img:nth-child(3){
+            margin-left: 50px;
+            margin-top: -335px;
+        }
+        .s3 img:nth-child(4){
+            margin-left: -110px;
+            margin-top: -270px;
+        }
+        .s3 img:nth-child(5){
+            margin-left: -165px;
+            margin-top: 240px;
+        }
+        .s3 img:nth-child(6){
+            margin-left: -100px;
+            margin-top: 165px;
+        }
+        .s3 img:nth-child(7){
+            margin-left: -170px;
+            margin-top: 30px;
+        }
+        .arr{
+            margin-left: -15px;
+            margin-top: 285px;
+            animation: ar 1s infinite ease-in-out;
+        }
+        @keyframes ar{
+            0%{transform: translateY(20px);opacity:0}
+            50%{transform: translateY(15px);opacity:1}
+            100%{transform: translateY(10px);opacity:0}
+        }
+    </style>
+
+    <script>
+        $(function () {
+
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'vertical',
+                mousewheelControl: true,
+                onInit: function (swiper) {                     //Swiper2.x的初始化是onFirstInit
+                    swiperAnimateCache(swiper);           //隐藏动画元素
+                    swiperAnimate(swiper);                    //初始化完成开始动画
+                },
+                onSlideChangeEnd: function (swiper) {
+                    swiperAnimate(swiper);                //每个slide切换结束时也运行当前slide动画
+                }
+
+            })
+
+
+        })
+    </script>
+
+</head>
+<body>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide s1">
+            <img src="images/one/1.png" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0">
+            <img src="images/one/2.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.5s">
+            <img src="images/one/3.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.5s" swiper-animate-delay="1s">
+            <img src="images/one/4.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s">
+            <img src="images/one/5.png" class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="2s">
+            <img class="arr" src="images/arr.png">
+        </div>
+
+        <div class="swiper-slide s2">
+            <img src="images/two/1.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.5s" swiper-animate-delay="0">
+            <img src="images/two/2.png" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0.5s">
+            <img src="images/two/3.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="1s">
+            <img src="images/two/4.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s">
+            <img src="images/two/5.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="2s">
+            <img src="images/two/6.png" class="ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.5s" swiper-animate-delay="2.5s">
+            <img src="images/two/7.png" class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="3s">
+            <img src="images/two/8.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="3.5s">
+            <img src="images/two/9.png" class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="4s">
+            <img class="arr" src="images/arr.png">
+        </div>
+
+        <div class="swiper-slide s3">
+            <img src="images/three/1.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0">
+            <img src="images/three/2.png" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0.5s">
+            <img src="images/three/3.png" class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="1s">
+            <img src="images/three/4.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="1.5s">
+            <img src="images/three/5.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="2s">
+            <img src="images/three/6.png" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="2.5s">
+            <img src="images/three/7.png" class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="3s">
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
