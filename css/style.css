@@ -83,13 +83,13 @@ html,body{
 /*主体部分 begin*/
 .nb_sec{
     width: 1005px;
-    height: 2000px;
+    height: 2260px;
     position: relative;
     /*overflow: hidden;*/
 }
 .nb_sec .nb_sec_l{
     width: 55px;
-    height: 2000px;
+    height: 2260px;
     background: url("../image/bg_l.gif");
     position: absolute;
     left: 0;
@@ -97,7 +97,7 @@ html,body{
 }
 .nb_sec .nb_sec_l_gezi{
     width: 10px;
-    height: 2000px;
+    height: 2260px;
     background: url("../image/bg_gezi.gif");
     position: absolute;
     left: 55px;
@@ -105,7 +105,7 @@ html,body{
 }
 .nb_sec .nb_sec_r{
     width: 55px;
-    height: 2000px;
+    height: 2260px;
     position: absolute;
     right: 0;
     top: 0;
@@ -113,7 +113,7 @@ html,body{
 }
 .nb_sec .nb_sec_r_gezi{
     width: 10px;
-    height: 2000px;
+    height: 2260px;
     background: url("../image/bg_gezi.gif");
     position: absolute;
     right: 55px;
@@ -121,7 +121,7 @@ html,body{
 }
 .nb_sec .nb_sec_r_bowen{
     width: 20px;
-    height: 2000px;
+    height: 2260px;
     position: absolute;
     right: 65px;
     top: 0;
@@ -161,7 +161,7 @@ html,body{
     /*主体内容  左边*/
 .center_body .center_body_left{
     width: 180px;
-    height: 1860px;  /*线条长度*/
+    height: 2120px;  /*线条长度*/
     border-right: 1px solid rgb(188, 212, 207);
     float: left;
 
@@ -287,18 +287,10 @@ html,body{
     margin-bottom: 15px;
 }
 
-
-
-
-
-
-
-
 /*底部*/
 .footer{
     width: 1005px;
     height: 110px;
     background: url("../image/bottom.jpg");
-
 }
 
